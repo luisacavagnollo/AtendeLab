@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'includes/auth.php';
-require_once __DIR__ . '/config/database.php';
+require __DIR__ . '/../../config/auth.php';
+require_once __DIR__ . '/../../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'] ?? '';
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("DELETE FROM tipos_atendimentos WHERE id=?");
         $stmt->execute([$_POST['id']]);
     }
-    header('Location: tipos_atendimento.php');
+    header('Location: /atendelab/app/Views/tipos_atendimento.php');
     exit;
 }
 
@@ -27,7 +27,7 @@ if (isset($_GET['editar'])) {
     $editando = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-require 'includes/header.php';
+require __DIR__ . '/layouts/header.php';
 ?>
 
 <h2>Tipos de Atendimento</h2>
@@ -76,4 +76,4 @@ require 'includes/header.php';
     </tbody>
 </table>
 
-<?php require 'includes/footer.php'; ?>
+<?php require __DIR__ . '/layouts/footer.php'; ?>

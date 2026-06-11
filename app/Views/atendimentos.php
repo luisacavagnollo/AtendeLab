@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'includes/auth.php';
-require_once __DIR__ . '/config/database.php';
+require __DIR__ . '/../../config/auth.php';
+require_once __DIR__ . '/../../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $acao = $_POST['acao'] ?? '';
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("DELETE FROM atendimentos WHERE id=?");
         $stmt->execute([$_POST['id']]);
     }
-    header('Location: atendimentos.php');
+    header('Location: /atendelab/app/Views/atendimentos.php');
     exit;
 }
 
@@ -56,7 +56,7 @@ $atendimentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $pessoas = $pdo->query("SELECT id, nome FROM pessoas ORDER BY nome")->fetchAll(PDO::FETCH_ASSOC);
 $tipos = $pdo->query("SELECT id, nome FROM tipos_atendimentos WHERE status='ativo' ORDER BY nome")->fetchAll(PDO::FETCH_ASSOC);
 
-require 'includes/header.php';
+require __DIR__ . '/layouts/header.php';
 ?>
 
 <h2>Atendimentos</h2>
@@ -201,4 +201,4 @@ require 'includes/header.php';
     </tbody>
 </table>
 
-<?php require 'includes/footer.php'; ?>
+<?php require __DIR__ . '/layouts/footer.php'; ?>

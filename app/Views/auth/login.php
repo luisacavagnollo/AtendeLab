@@ -2,11 +2,11 @@
 session_start();
 
 if (isset($_SESSION['usuario_id'])) {
-    header('Location: dashboard.php');
+    header('Location: /atendelab/app/Views/dashboard.php');
     exit;
 }
 
-require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/../../../config/database.php';
 
 $erro = '';
 
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['usuario_id'] = $usuario['id'];
         $_SESSION['usuario_nome'] = $usuario['nome'];
         $_SESSION['usuario_perfil'] = $usuario['perfil'];
-        header('Location: dashboard.php');
+        header('Location: /atendelab/app/Views/dashboard.php');
         exit;
     } else {
         $erro = 'E-mail ou senha incorretos.';
