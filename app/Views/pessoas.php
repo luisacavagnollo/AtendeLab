@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'includes/auth.php';
-require_once __DIR__ . '/config/database.php';
+require __DIR__ . '/../../config/auth.php';
+require_once __DIR__ . '/../../config/database.php';
 
 // Ações
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("DELETE FROM pessoas WHERE id=?");
         $stmt->execute([$_POST['id']]);
     }
-    header('Location: pessoas.php');
+    header('Location: /atendelab/app/Views/pessoas.php');
     exit;
 }
 
@@ -28,7 +28,7 @@ if (isset($_GET['editar'])) {
     $editando = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-require 'includes/header.php';
+require __DIR__ . '/layouts/header.php';
 ?>
 
 <h2>Pessoas</h2>
@@ -88,4 +88,4 @@ require 'includes/header.php';
     </tbody>
 </table>
 
-<?php require 'includes/footer.php'; ?>
+<?php require __DIR__ . '/layouts/footer.php'; ?>

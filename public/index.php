@@ -10,7 +10,7 @@
 <div class="text-center">
     <h1>AtendeLab</h1>
     <p class="lead">Sistema de Controle de Atendimentos Acadêmicos</p>
-    <a href="/atendelab/login.php" class="btn btn-primary btn-lg">Entrar</a>
+    <a href="/atendelab/app/Views/auth/login.php" class="btn btn-primary btn-lg">Entrar</a>
 </div>
 </body>
 </html>

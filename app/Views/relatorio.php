@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'includes/auth.php';
-require_once __DIR__ . '/config/database.php';
+require __DIR__ . '/../../config/auth.php';
+require_once __DIR__ . '/../../config/database.php';
 
 // Filtros
 $where = [];
@@ -79,7 +79,7 @@ $pessoas = $pdo->query("SELECT id, nome FROM pessoas ORDER BY nome")->fetchAll(P
                 <button type="button" onclick="window.print()" class="btn btn-outline-dark w-100">Imprimir</button>
             </div>
             <div class="col-md-1">
-                <a href="dashboard.php" class="btn btn-outline-secondary w-100">Voltar</a>
+                <a href="/atendelab/app/Views/dashboard.php" class="btn btn-outline-secondary w-100">Voltar</a>
             </div>
         </form>
     </div>
