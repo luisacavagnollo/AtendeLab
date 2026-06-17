@@ -77,15 +77,22 @@ class UsuariosController
         }
     }
 
-    public function excluir(int $id): bool
+    public function inativar(int $id): bool
     {
         try {
-            $stmt = $this->pdo->prepare("DELETE FROM usuarios WHERE id = :id");
+            $stmt = $this->pdo->prepare("UPDATE usuarios SET status = 'inativo' WHERE id = :id");
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             return $stmt->execute();
         } catch (PDOException $e) {
-            error_log("Erro ao excluir usuário: " . $e->getMessage());
+            error_log("Erro ao inativar usuário: " . $e->getMessage());
             return false;
         }
+    }
+
+    public function excluir(int $id): bool
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM usuarios WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 }

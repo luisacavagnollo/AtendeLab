@@ -22,6 +22,9 @@ if (session_status() === PHP_SESSION_NONE) session_start();
                 <li class="nav-item"><a class="nav-link" href="/atendelab/app/Views/pessoas.php">Pessoas</a></li>
                 <li class="nav-item"><a class="nav-link" href="/atendelab/app/Views/tipos_atendimento.php">Tipos de Atendimento</a></li>
                 <li class="nav-item"><a class="nav-link" href="/atendelab/app/Views/atendimentos.php">Atendimentos</a></li>
+                <?php if (($_SESSION['usuario_perfil'] ?? '') === 'admin'): ?>
+                <li class="nav-item"><a class="nav-link" href="/atendelab/app/Views/usuarios/listar.php">Usuários</a></li>
+                <?php endif; ?>
                 <li class="nav-item"><a class="nav-link" href="/atendelab/app/Views/relatorio.php">Relatório</a></li>
             </ul>
             <div class="d-flex align-items-center">
