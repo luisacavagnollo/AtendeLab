@@ -14,7 +14,7 @@ CREATE TABLE usuarios (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL,
-    perfil ENUM('admin', 'atendente', 'aluno') DEFAULT 'atendente',
+    perfil ENUM('admin', 'atendente') DEFAULT 'atendente',
     status ENUM('ativo', 'inativo') DEFAULT 'ativo',
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -22,36 +22,38 @@ CREATE TABLE usuarios (
 -- Tabela: pessoas
 CREATE TABLE pessoas (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
+    nome VARCHAR(100) NOT NULL,
     documento VARCHAR(20) UNIQUE,
     telefone VARCHAR(20),
+    email VARCHAR(100),
     curso VARCHAR(100),
     periodo VARCHAR(100),
-    status VARCHAR(100)
+    observacoes TEXT,
+    status ENUM('ativo', 'inativo') DEFAULT 'ativo'
 );
 
 -- Tabela: tipos_atendimentos
 CREATE TABLE tipos_atendimentos (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
+    nome VARCHAR(100) NOT NULL,
     descricao TEXT,
-    status ENUM('ativo', 'inativo')
+    status ENUM('ativo', 'inativo') DEFAULT 'ativo'
 );
 
 -- Tabela: atendimentos
 CREATE TABLE atendimentos (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    pessoa_id INT,
-    tipo_atendimento INT,
-    usuario_id INT,
-    data_atendimento DATE,
-    hora_atendimento TIME,
+    pessoa_id INT NOT NULL,
+    tipo_atendimento_id INT NOT NULL,
+    usuario_id INT NOT NULL,
     descricao TEXT,
-    observacao TEXT,
-    status ENUM('aberto', 'em andamento', 'concluido'),
+    status ENUM('aberto', 'em_andamento', 'concluido') DEFAULT 'aberto',
+    data_atendimento DATE NOT NULL,
+    horario_atendimento TIME NOT NULL,
+    observacao_final TEXT,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (pessoa_id) REFERENCES pessoas(id),
-    FOREIGN KEY (tipo_atendimento) REFERENCES tipos_atendimentos(id),
+    FOREIGN KEY (tipo_atendimento_id) REFERENCES tipos_atendimentos(id),
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
